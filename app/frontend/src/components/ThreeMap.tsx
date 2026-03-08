@@ -98,22 +98,49 @@ const Marker = ({
    );
 };
 
+const CameraController = ({ selectedItem }: { selectedItem: any }) => {
+   const { camera, controls } = (THREE as any); // Type helper
+
+   useFrame((state) => {
+      if (selectedItem) {
+         const targetPos = new THREE.Vector3(
+            selectedItem.position[0],
+            selectedItem.position[1] + 1.5,
+            selectedItem.position[2] + 2
+         );
+         state.camera.position.lerp(targetPos, 0.05);
+
+         const focusPoint = new THREE.Vector3(...selectedItem.position);
+         state.camera.lookAt(focusPoint);
+      }
+   });
+
+   return null;
+};
+
 export const ThreeMap = () => {
-   const { warungs, alerts, setSelectedItem } = useWiraStore();
+   const { warungs, alerts, selectedItem, setSelectedItem } = useWiraStore();
 
    return (
-      <div className="w-full h-[600px] relative rounded-2xl overflow-hidden glass-panel border border-primary/20">
-         <Canvas shadows>
-            <PerspectiveCamera makeDefault position={[0, 5, 8]} />
-            <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI / 4} maxPolarAngle={Math.PI / 2.5} />
+      <div className="w-full h-full relative rounded-2xl overflow-hidden glass-panel border border-primary/20">
+         <Canvas shadows dpr={[1, 2]}>
+            <PerspectiveCamera makeDefault position={[0, 8, 12]} fov={45} />
+            <OrbitControls
+               enablePan={false}
+               minPolarAngle={Math.PI / 6}
+               maxPolarAngle={Math.PI / 2.2}
+               makeDefault
+            />
 
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={1} color="#06f9f9" />
-            <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={1} color="#ff00ff" />
+            <CameraController selectedItem={selectedItem} />
 
-            <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+            <ambientLight intensity={0.4} />
+            <pointLight position={[10, 10, 10]} intensity={1.5} color="#06f9f9" />
+            <spotLight position={[-10, 20, 10]} angle={0.2} penumbra={1} intensity={2} color="#ff00ff" />
 
-            <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+            <Stars radius={100} depth={50} count={7000} factor={4} saturation={0} fade speed={1} />
+
+            <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
                <MalaysiaMap />
 
                {warungs.map((warung) => (
@@ -136,9 +163,25 @@ export const ThreeMap = () => {
                ))}
             </Float>
          </Canvas>
+
+         {/* Location Indicator Overlay */}
+         <div className="absolute top-4 left-4 z-10 flex flex-col gap-1">
+            <h3 className="text-white font-black text-xs uppercase tracking-widest bg-primary/20 backdrop-blur-md px-3 py-1 rounded-full border border-primary/30">
+               Malaysia Resilience Network
+            </h3>
+            {selectedItem && (
+               <div className="flex items-center gap-2 animate-in slide-in-from-left-2 duration-300">
+                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  <span className="text-[10px] text-primary font-bold uppercase brightness-125">
+                     Focused: {selectedItem.type === 'WARUNG' ? selectedItem.name : 'Emergency Alert'}
+                  </span>
+               </div>
+            )}
+         </div>
+
          <div className="absolute bottom-4 left-4 pointer-events-none">
-            <p className="text-primary text-xs font-bold uppercase tracking-widest bg-background/50 px-2 py-1 rounded">
-               Real-time Malaysia Resilience Map
+            <p className="text-primary text-[8px] font-black uppercase tracking-[0.3em] opacity-50 font-mono">
+               Network Protocol v2.0
             </p>
          </div>
       </div>

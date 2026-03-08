@@ -1,3 +1,5 @@
+"use client";
+
 import { ThreeMap } from "@/components/ThreeMap";
 import { WarungDigitizer } from "@/components/WarungDigitizer";
 import { BanjirAlertLens } from "@/components/BanjirAlertLens";
@@ -22,7 +24,7 @@ export default function Home() {
           </div>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Warung Wira</h1>
-            <p className="text-primary text-[10px] font-bold tracking-widest uppercase">Future SME Hub</p>
+            <p className="text-primary text-[10px] font-bold tracking-widest uppercase">Verified SME Network</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
@@ -134,17 +136,17 @@ export default function Home() {
                 </div>
                 <div>
                   <h2 className="text-4xl font-black tracking-tighter uppercase">
-                    {selectedItem.type === 'WARUNG' ? selectedItem.name : 'Emergency Alert'}
+                    {selectedItem.type === 'WARUNG' ? selectedItem.name : 'Risk Alert'}
                   </h2>
-                  <p className="text-slate-400 font-bold tracking-widest text-xs uppercase">
-                    {selectedItem.type === 'WARUNG' ? 'Active SME Entity' : 'Critical Hazard Data'}
+                  <p className="text-slate-400 font-bold tracking-widest text-xs uppercase font-mono">
+                    {selectedItem.type === 'WARUNG' ? 'Verified SME' : 'Live Reporting'}
                   </p>
                 </div>
               </div>
 
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-3">Context & Intelligence</h3>
+                  <h3 className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-3">Local Insights</h3>
                   <p className="text-xl text-slate-100 font-medium leading-relaxed">
                     {selectedItem.type === 'WARUNG' ? selectedItem.description : selectedItem.message}
                   </p>
@@ -168,8 +170,8 @@ export default function Home() {
                   <div className="flex items-center gap-6 p-6 bg-hazard-red/10 rounded-3xl border border-hazard-red/20">
                     <TrendingIcon size={32} className="text-hazard-red" />
                     <div>
-                      <p className="font-bold text-lg">Resilience Protocol Activated</p>
-                      <p className="text-slate-400 text-sm italic">"Jaga diri, jaga komuniti." — Wira AI</p>
+                      <p className="font-bold text-lg">Resilience Active</p>
+                      <p className="text-slate-400 text-sm italic">"Jaga diri, jaga komuniti."</p>
                     </div>
                   </div>
                 )}

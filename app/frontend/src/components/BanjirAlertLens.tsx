@@ -59,7 +59,7 @@ export const BanjirAlertLens = () => {
                <div className="flex items-center justify-center size-10 rounded-lg bg-primary/20">
                   <AlertTriangle size={24} className="text-primary neon-glow" />
                </div>
-               <h2 className="text-xl font-bold tracking-tight">Banjir-Alert</h2>
+               <h2 className="text-xl font-bold tracking-tight">Risk Reporting</h2>
             </div>
          </header>
 
@@ -68,7 +68,7 @@ export const BanjirAlertLens = () => {
                {loading ? (
                   <div className="flex flex-col items-center gap-4">
                      <div className="size-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-                     <p className="text-xs font-bold text-primary animate-pulse uppercase">Gemini Analyzing...</p>
+                     <p className="text-xs font-bold text-primary animate-pulse uppercase font-mono">Analyzing...</p>
                   </div>
                ) : reportData ? (
                   <div className="w-full">
@@ -76,8 +76,8 @@ export const BanjirAlertLens = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-background-dark to-transparent" />
                         <div className="absolute bottom-4 left-6 flex items-end justify-between right-6">
                            <div>
-                              <span className="text-primary text-[10px] font-bold uppercase tracking-widest">Emergency Status</span>
-                              <h1 className="text-2xl font-bold">{reportData.severity} RISK DETECTED</h1>
+                              <span className="text-primary text-[10px] font-bold uppercase tracking-widest font-mono">Status Check</span>
+                              <h1 className="text-2xl font-bold">{reportData.severity} RISK</h1>
                            </div>
                            <div className={`${reportData.severity === 'HIGH' ? 'bg-hazard-red' : 'bg-hazard-orange'} text-white px-3 py-1 rounded font-black text-sm`}>
                               {reportData.severity}
@@ -123,9 +123,9 @@ export const BanjirAlertLens = () => {
                   className="w-full flex items-center justify-center gap-4 bg-primary text-background h-16 rounded-full neon-glow hover:brightness-110 active:scale-95 transition-all"
                >
                   <Radio size={28} />
-                  <span className="text-lg font-black uppercase tracking-tighter">Wira Alert</span>
+                  <span className="text-lg font-black uppercase tracking-tighter">Report Risk</span>
                </button>
-               <p className="text-center text-slate-500 text-[8px] font-bold uppercase mt-4 tracking-widest">Broadcast emergency report via Gemini AI</p>
+               <p className="text-center text-slate-500 text-[8px] font-bold uppercase mt-4 tracking-widest font-mono">Secure localized reporting via Wira</p>
             </div>
          </main>
       </div>

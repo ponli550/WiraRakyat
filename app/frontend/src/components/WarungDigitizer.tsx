@@ -44,9 +44,9 @@ export const WarungDigitizer = () => {
                // Wire to global store
                const newWarung = {
                   id: `warung-${Math.random().toString(36).substr(2, 9)}`,
-                  name: "New AI-Digitized Warung",
+                  name: "New Warung Profile",
                   items,
-                  description: "Digitized via Wira AI Lens",
+                  description: "Digitized via Wira",
                   position: [Math.random() * 4 - 2, 0.5, Math.random() * 4 - 2] as [number, number, number],
                   type: 'WARUNG' as const
                };
@@ -76,8 +76,8 @@ export const WarungDigitizer = () => {
                      <div className="absolute top-0 left-0 w-full h-1 bg-primary/50 shadow-[0_0_15px_#06f9f9] animate-scan" />
                   </div>
                   <div className="mt-8 text-center">
-                     <p className="text-primary text-sm font-bold animate-pulse">Scanning... {progress}%</p>
-                     <p className="text-slate-400 text-[10px] mt-1">Analyzing menu structure & pricing</p>
+                     <p className="text-primary text-sm font-bold animate-pulse">Processing... {progress}%</p>
+                     <p className="text-slate-400 text-[10px] mt-1 font-mono">Extracting items and rates</p>
                   </div>
                </div>
             )}
